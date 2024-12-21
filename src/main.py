@@ -1,6 +1,7 @@
 import os, time, yaml
 import threading
 import uvicorn
+import logger
 
 from fastapi import FastAPI
 from fastapi_bridge.fastapiServer  import WebServer
@@ -10,17 +11,18 @@ from contextlib import asynccontextmanager
 # Check if the directory exists, if not, create it
 path = os.environ['PYTHONPATH']
 directory_path = f"{os.environ['RESOURCE_PATH']}/fastapi-config.yaml"       
+log = logger.getLogger()
 
 with open(f"{directory_path}", 'r') as file:
     config = yaml.safe_load(file)
                 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print(f"\n\n\n\nlifespan started   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n")      
-    webServer = WebServer(app, config)
+    log.info("fastApi starting.... create server socket")      
+    webServer = WebServer(app, config, log)
     yield
+    log.info("fastApi closing.... close all open socket")      
     webServer.close_all()
-    print(f"\n\n\n\nlifespan completed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n")  
                 
 app = FastAPI(lifespan=lifespan)
 

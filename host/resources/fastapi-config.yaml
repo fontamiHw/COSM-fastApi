@@ -8,4 +8,9 @@ fastapi:
 cosmBot:
   host: "127.0.0.1" 
   port: 5000
+  secErrorWait: 60
+  maxRetryError: 3
   maxConnect: 1 # at the moment only one is forced
+
+logs:
+  webex-log: "CosmFastapi-logfile.log"
