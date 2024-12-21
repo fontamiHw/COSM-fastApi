@@ -18,4 +18,11 @@ class Routes:
             if self.conn:
                 k=4
                 y = x*k
-                return {"result": y}     
+                data =  {"result": y}
+                self.send(data)
+                return data     
+    
+    def send(self, data):
+        jsonDump = json.dumps(data)
+        dataB = bytes(jsonDump, encoding="utf-8")
+        self.conn.send(dataB)  # send data to the client

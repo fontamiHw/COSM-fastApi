@@ -2,8 +2,10 @@
 export APPLOGS="./host/logs"
 export RESOURCE_PATH="./host/resources"
 export PYTHONPATH="./src":${PYTHONPATH}
+
+
 # Path to the YAML file
-yaml_file="${RESOURCE_PATH}/config.yaml"
+yaml_file="${RESOURCE_PATH}/fastapi-config.yaml"
 
 # Use yq to extract the value of 'port'
 PORT=$(yq eval '.fastapi.port' "$yaml_file")
