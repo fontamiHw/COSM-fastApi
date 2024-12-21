@@ -1,0 +1,7 @@
+logs:
+  webex-log: "FastApi-logfile.log"
+
+cosmBot:
+  host: "127.0.0.1" 
+  port: 5000
+  maxConnect: 1 # at the moment only one is forced

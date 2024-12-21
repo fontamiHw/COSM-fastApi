@@ -9,14 +9,13 @@ from fastapi_bridge.fastapiServer  import WebServer
 # Check if the directory exists, if not, create it
 path = os.environ['PYTHONPATH']
 print(f"PYTHONPATH {path}")
-directory_path = f"{os.environ['RESOURCE_PATH']}/config.yaml"       
+directory_path = f"{os.environ['RESOURCE_PATH']}/fastapt-config.yaml"       
 
 with open(f"{directory_path}", 'r') as file:
     config = yaml.safe_load(file)
-    fastapi_config = config['fastapi']
                 
-app = FastAPI(host=fastapi_config['host'], port=fastapi_config['port'])
-webServer = WebServer(app)
+app = FastAPI()
+webServer = WebServer(app, config)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host=fastapi_config['host'], port=fastapi_config['port'])
+    uvicorn.run(app)
