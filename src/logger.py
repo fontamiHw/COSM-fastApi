@@ -6,7 +6,7 @@ import yaml
 log = logging.getLogger("builderProcess")
 log.setLevel(logging.INFO)
 
-with open(f"{os.environ['RESOURCE_PATH']}/fastapi-config.yaml", 'r') as file:
+with open(f"{os.environ['RESOURCE_PATH']}/CosmFastapi-config.yaml", 'r') as file:
     config = yaml.safe_load(file)
                 
 # Create a file handler

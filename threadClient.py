@@ -32,20 +32,14 @@ def handle_task():
     # Simulate some long-running task
     print("Task is running...")
     
-    # Receive the JSON data from the server
-    data = client_socket.recv(1024)  # buffer size 1024 bytes
+    while True:
+        # Receive the JSON data from the server
+        data = client_socket.recv(1024)  # buffer size 1024 bytes
     
-    # Deserialize JSON data
-    print ('Retrieved',len(data),'characters')
-    received_data = json.loads(data.decode("utf-8"))
-    print(f"Received JSON data: {received_data}")
-    
-    
-    # json_data = data.decode('utf-8')
-        
-    # # Parse the JSON data
-    # parsed_data = json.loads(json_data)
-    # print(f"Received data from server: {parsed_data}")
+        # Deserialize JSON data
+        print ('Retrieved',len(data),'characters')
+        received_data = json.loads(data.decode("utf-8"))
+        print(f"Received JSON data: {received_data}")
 
     print("Task completed.")
 

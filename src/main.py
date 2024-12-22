@@ -10,7 +10,7 @@ from contextlib import asynccontextmanager
 # Load configuration from YAML file
 # Check if the directory exists, if not, create it
 path = os.environ['PYTHONPATH']
-directory_path = f"{os.environ['RESOURCE_PATH']}/fastapi-config.yaml"       
+directory_path = f"{os.environ['RESOURCE_PATH']}/CosmFastapi-config.yaml"       
 log = logger.getLogger()
 
 with open(f"{directory_path}", 'r') as file:

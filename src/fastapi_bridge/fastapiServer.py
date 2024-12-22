@@ -10,7 +10,6 @@ class WebServer:
         self.routes = Routes(self.app, log)
         
     def setup_bot_server(self, bot_config):
-        time.sleep(5)
         # get the hostname
         host = bot_config['host']
         port = bot_config['port']  # initiate port no above 1024
