@@ -5,7 +5,7 @@ fastapi:
   host: "127.0.0.1" 
   port: 8000
 
-cosmBot:
+socket:
   host: "127.0.0.1" 
   port: 5000
   secErrorWait: 60

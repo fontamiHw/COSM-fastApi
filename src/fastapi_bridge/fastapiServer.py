@@ -6,7 +6,7 @@ class WebServer:
         self.log = log
         self.app = app
         self.config = config
-        self.setup_bot_server(config['cosmBot'])
+        self.setup_bot_server(config['socket'])
         self.routes = Routes(self.app, log)
         
     def setup_bot_server(self, bot_config):
