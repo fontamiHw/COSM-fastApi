@@ -2,3 +2,4 @@ src/**/__pycache__
 /host/logs/CosmFastapi-logfile.log
 /Docker/app
 /Docker/host
+/host/*

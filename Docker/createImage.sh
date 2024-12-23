@@ -11,7 +11,7 @@ cp -R ../src/* app/.
 echo "create directory for mount volume"
 mkdir -p host/resources
 echo "coping the configuration yaml file"
-cp ../host/resources/CosmFastapi-config.yaml host/resources
+cp ../CosmFastapi-config.yaml host/resources
 
 echo "Docker image 'cosm-fastapi' generating"
 docker build -t cosm-fastapi .

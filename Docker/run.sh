@@ -1,6 +1,9 @@
 #!/bin/bash
 
-source ./.enviroment
+export PATH="$APP_COSM_PATH:$PATH"
+echo "move resource files int the mounted path"
+mv ${TMP_RESOURCE_PATH}/* ${RESOURCE_PATH}/. 
+
 echo "show enviroment variable"
 env
 echo

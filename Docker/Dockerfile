@@ -19,11 +19,14 @@ ENV APP_ROOT_HOST="${APP_ROOT_PATH}/host"
 ENV APP_COSM_PATH="${APP_ROOT_PATH}/CosmFastApi"
 ENV APPLOGS="${APP_ROOT_HOST}/logs"
 ENV RESOURCE_PATH="${APP_ROOT_HOST}/resources"
+ENV TMP_RESOURCE_PATH="${APP_ROOT_PATH}/resources"
+ENV PYTHONPATH="${APP_COSM_PATH}"
 
 # Create a new directory under /app
 RUN mkdir -p ${APP_COSM_PATH}
 RUN mkdir -p ${RESOURCE_PATH}
 RUN mkdir -p ${APPLOGS}
+RUN mkdir -p ${TMP_RESOURCE_PATH}
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
@@ -34,12 +37,11 @@ RUN pip install --no-cache-dir  pyaml
 RUN pip install --no-cache-dir "fastapi[standard]" 
 
 # Copy the system files
-COPY .enviroment ${APP_ROOT_PATH}
 COPY run.sh ${APP_ROOT_PATH}
 
 # Copy the current directory contents into the container at /app
 COPY app       ${APP_COSM_PATH}
-COPY host/resources ${RESOURCE_PATH}
+COPY host/resources ${TMP_RESOURCE_PATH}
 
 # Make sure the script is executable
 RUN chmod +x ${APP_ROOT_PATH}/run.sh
