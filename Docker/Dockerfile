@@ -10,13 +10,13 @@ RUN apt-get -y update
 # Upgrade already installed packages:
 RUN apt-get -y upgrade
 # Install a new package:
-RUN apt-get -y install syslog-ng vim net-tools 
+RUN apt-get -y install syslog-ng vim net-tools yq
 
 # Define environment variable
 
 ENV APP_ROOT_PATH="/app"
 ENV APP_ROOT_HOST="${APP_ROOT_PATH}/host"
-ENV APP_COSM_PATH="${APP_ROOT_PATH}/CosmBot"
+ENV APP_COSM_PATH="${APP_ROOT_PATH}/CosmFastApi"
 ENV APPLOGS="${APP_ROOT_HOST}/logs"
 ENV RESOURCE_PATH="${APP_ROOT_HOST}/resources"
 
@@ -30,8 +30,8 @@ EXPOSE 80
 
 # Install any needed packages specified in requirements.txt
 # If you don't have any additional packages, you can skip this step
-RUN pip install --no-cache-dir atlassian-python-api python-jenkins pyaml Flask
-RUN pip install --no-cache-dir "fastapi[standard]" webex-bot[proxy]
+RUN pip install --no-cache-dir  pyaml 
+RUN pip install --no-cache-dir "fastapi[standard]" 
 
 # Copy the system files
 COPY .enviroment ${APP_ROOT_PATH}
@@ -39,7 +39,7 @@ COPY run.sh ${APP_ROOT_PATH}
 
 # Copy the current directory contents into the container at /app
 COPY app       ${APP_COSM_PATH}
-COPY resources ${RESOURCE_PATH}
+COPY host/resources ${RESOURCE_PATH}
 
 # Make sure the script is executable
 RUN chmod +x ${APP_ROOT_PATH}/run.sh

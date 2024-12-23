@@ -1,16 +1,18 @@
+echo "clean docker paths"
+rm -rf host/*
+rm -rf app/*
+
 echo "Coping all the python files"
 mkdir -p app
 cp -R ../src/* app/.
 
 
-echo "coping the configuration yaml file"
+
+echo "create directory for mount volume"
 mkdir -p host/resources
-cp ../host/resources/config.yaml resources
+echo "coping the configuration yaml file"
+cp ../host/resources/CosmFastapi-config.yaml host/resources
 
-echo "Docker image generating"
-docker build -t cosm-bot .
-
-echo "clean docker paths"
-rm -rf resources/*
-rm -rf app/*
+echo "Docker image 'cosm-fastapi' generating"
+docker build -t cosm-fastapi .
 
