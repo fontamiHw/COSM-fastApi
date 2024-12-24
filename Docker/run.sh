@@ -1,12 +1,16 @@
 #!/bin/bash
 
-echo "move resource files int the mounted path"
-# Variables for source and destination directories
-source_file=${TMP_RESOURCE_PATH}/CosmFastapi-config.yaml
-destination_dir=${RESOURCE_PATH}
+########### PREPARE MOUNTED VOLUME ###########
+echo "Creating mounted directories"
+mkdir -p ${APPLOGS}
+mkdir -p ${RESOURCE_PATH}
 
-# Extract the filename from the source file path
+########### PREPARE CONFIG IN MOUNTED VOLUME ###########
+echo "move resource files int the mounted path"
 filename="CosmFastapi-config.yaml"
+# Variables for source and destination directories
+source_file=${TMP_RESOURCE_PATH}/${filename}
+destination_dir=${RESOURCE_PATH}
 
 # Check if the file already exists in the destination directory
 if [ ! -e "$destination_dir/$filename" ]; then
@@ -21,16 +25,15 @@ echo "show mounted volume"
 ls -latR /app/host
 echo
 
-
+########### ENVIROMENT ###########
 export PATH="$APP_COSM_PATH:$PATH"
 echo "show enviroment variable"
 env
-
-echo "moving in /app/CosmFastApi"
-cd /app/CosmFastApi
-pwd
-
+echo
 
 ########### START APPLICATION ###########
+echo "moving in ${APP_COSM_PATH}"
+cd ${APP_COSM_PATH}
+pwd
 echo "Cosm fastapi Starting on --host ${FASTAPI_HOST} --port ${FASTAPI_PORT} ....."
 fastapi run main.py --host ${FASTAPI_HOST} --port ${FASTAPI_PORT}

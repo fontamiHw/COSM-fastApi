@@ -5,9 +5,9 @@ FROM python:3.8-slim
 # Set the working directory
 WORKDIR /app
 
-# Download latest listing of available packages:
+# # Download latest listing of available packages:
 RUN apt-get -y update
-# Upgrade already installed packages:
+# # Upgrade already installed packages:
 RUN apt-get -y upgrade
 # Install a new package:
 RUN apt-get -y install syslog-ng vim net-tools 
@@ -23,9 +23,10 @@ ENV TMP_RESOURCE_PATH="${APP_ROOT_PATH}/resources"
 ENV PYTHONPATH="${APP_COSM_PATH}"
 
 # Create a new directory under /app
+RUN mkdir -p ${APP_ROOT_HOST}
 RUN mkdir -p ${APP_COSM_PATH}
-RUN mkdir -p ${RESOURCE_PATH}
-RUN mkdir -p ${APPLOGS}
+# RUN mkdir -p ${RESOURCE_PATH}
+# RUN mkdir -p ${APPLOGS}
 RUN mkdir -p ${TMP_RESOURCE_PATH}
 
 # Make port 80 available to the world outside this container
