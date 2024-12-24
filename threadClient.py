@@ -3,7 +3,7 @@ import json
 import threading
 import time
 
-host = "192.168.1.75"
+host = "127.0.0.1"
 port = 5000  # Same port as the server
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
