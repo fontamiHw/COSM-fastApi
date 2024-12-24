@@ -1,34 +1,36 @@
 #!/bin/bash
 
-export PATH="$APP_COSM_PATH:$PATH"
 echo "move resource files int the mounted path"
-mv ${TMP_RESOURCE_PATH}/* ${RESOURCE_PATH}/. 
+# Variables for source and destination directories
+source_file=${TMP_RESOURCE_PATH}/CosmFastapi-config.yaml
+destination_dir=${RESOURCE_PATH}
 
-echo "show enviroment variable"
-env
+# Extract the filename from the source file path
+filename="CosmFastapi-config.yaml"
+
+# Check if the file already exists in the destination directory
+if [ ! -e "$destination_dir/$filename" ]; then
+    # Copy the file to the destination directory
+    cp "$source_file" "$destination_dir/"
+    echo "File '$filename' copied to '$destination_dir'."
+else
+    echo "File '$filename' already exists in '$destination_dir'. No action taken."
+fi
 echo
 echo "show mounted volume"
 ls -latR /app/host
 echo
 
+
+export PATH="$APP_COSM_PATH:$PATH"
+echo "show enviroment variable"
+env
+
 echo "moving in /app/CosmFastApi"
 cd /app/CosmFastApi
 pwd
 
-echo "python version is"
-python --version
-
-
 
 ########### START APPLICATION ###########
-
-# # Path to the YAML file
-# yaml_file="${RESOURCE_PATH}/CosmFastapi-config.yaml"
-# cat ${yaml_file}
-# # Use yq to extract the value of 'port' and 'host'
-# echo "read config file ${yaml_file}."
-# PORT=$(yq eval '.fastapi.port' "${yaml_file}")
-# HOST=$(yq eval '.fastapi.host' "${yaml_file}")
-
 echo "Cosm fastapi Starting on --host ${FASTAPI_HOST} --port ${FASTAPI_PORT} ....."
 fastapi run main.py --host ${FASTAPI_HOST} --port ${FASTAPI_PORT}

@@ -10,7 +10,7 @@ RUN apt-get -y update
 # Upgrade already installed packages:
 RUN apt-get -y upgrade
 # Install a new package:
-RUN apt-get -y install syslog-ng vim net-tools yq
+RUN apt-get -y install syslog-ng vim net-tools 
 
 # Define environment variable
 
