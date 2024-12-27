@@ -1,18 +1,17 @@
 import socket, time, threading
 from fastapi_bridge.routes import Routes
 
-class WebServer:
+class ContainerCommunication:
     def __init__(self, app, config, log):
         self.log = log
-        self.app = app
         self.config = config
-        self.setup_bot_server(config['socket'])
-        self.routes = Routes(self.app, log)
+        self.setup_bot_server(config['container_communication'])
+        self.routes = Routes(app, log)
         
-    def setup_bot_server(self, bot_config):
+    def setup_bot_server(self, container_communication_config):
         # get the hostname
-        host = bot_config['host']
-        port = bot_config['port']  # initiate port no above 1024
+        host = container_communication_config['host']
+        port = container_communication_config['port']  # initiate port no above 1024
 
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # get instance
         while True:
@@ -24,10 +23,10 @@ class WebServer:
                 break #Exit
             except Exception as e:
                 self.log.error(f"Exception {e}\n Wait ")
-                time.sleep(bot_config['secErrorWait'])
+                time.sleep(container_communication_config['secErrorWait'])
         
         # configure how many client the server can listen simultaneously
-        max_conn = bot_config['maxConnect']
+        max_conn = container_communication_config['maxConnect']
         max_conn=1 # at the moment only one is forced
         self.log.info(f"listening max {max_conn} possible client connection ....")
         self.server_socket.listen(max_conn)

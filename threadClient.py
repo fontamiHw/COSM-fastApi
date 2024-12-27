@@ -9,7 +9,20 @@ port = 5000  # Same port as the server
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     
 def start_client():
-
+    """
+    Starts the client, connects to the server, and spawns a task in a separate thread.
+    This function performs the following steps:
+    1. Connects to the server using the specified host and port.
+    2. Prints a message indicating a successful connection.
+    3. Spawns a new thread to handle a long-running task.
+    4. Waits for the task to complete.
+    5. Closes the client socket connection.
+    Note:
+        The variables `client_socket`, `host`, `port`, and the function `handle_task`
+        should be defined elsewhere in the code.
+    Raises:
+        Any exceptions raised during the connection or task execution will be propagated.
+    """
     try:
         # Connect to the server
         client_socket.connect((host, port))

@@ -8,7 +8,7 @@ export PYTHONPATH="./src":${PYTHONPATH}
 yaml_file="${RESOURCE_PATH}/CosmFastapi-config.yaml"
 
 # Use yq to extract the value of 'port'
-PORT=$(yq eval '.fastapi.port' "$yaml_file")
-HOST=$(yq eval '.fastapi.host' "$yaml_file")
+FASTAPI_PORT=$(yq eval '.fastapi.port' "$yaml_file")
+FASTAPI_HOST=$(yq eval '.fastapi.host' "$yaml_file")
 
-fastapi dev src/main.py --host ${HOST} --port ${PORT}
+fastapi run src/main.py --host ${FASTAPI_HOST} --port ${FASTAPI_PORT}

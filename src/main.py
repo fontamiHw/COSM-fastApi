@@ -4,7 +4,7 @@ import uvicorn
 import logger
 
 from fastapi import FastAPI
-from fastapi_bridge.fastapiServer  import WebServer
+from fastapi_bridge.containerCommunication  import ContainerCommunication
 from contextlib import asynccontextmanager
 
 # Load configuration from YAML file
@@ -19,10 +19,10 @@ with open(f"{directory_path}", 'r') as file:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     log.info("fastApi starting.... create server socket")      
-    webServer = WebServer(app, config, log)
+    container_comm = ContainerCommunication(app, config, log)
     yield
     log.info("fastApi closing.... close all open socket")      
-    webServer.close_all()
+    container_comm.close_all()
                 
 app = FastAPI(lifespan=lifespan)
 
