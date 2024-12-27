@@ -31,6 +31,7 @@ EXPOSE 8000
 
 # Copy the logrotate configuration file
 COPY CosmFastapi-logrotate /etc/logrotate.d/cosmfastapi
+RUN chmod 0444 /etc/logrotate.d/cosmfastapi
 
 # Add a cron job to run logrotate at 2:00 AM every day
 RUN echo "0 2 * * * /usr/sbin/logrotate /etc/logrotate.d/cosmfastapi" > /etc/cron.d/logrotate
