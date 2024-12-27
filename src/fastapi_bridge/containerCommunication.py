@@ -1,12 +1,13 @@
 import socket, time, threading
 from fastapi_bridge.routes import Routes
+import logger
 
 class ContainerCommunication:
-    def __init__(self, app, config, log):
-        self.log = log
+    def __init__(self, app, config):
+        self.log = logger.getLogger("ContainerCommunication")
         self.config = config
         self.setup_bot_server(config['container_communication'])
-        self.routes = Routes(app, log)
+        self.routes = Routes(app)
         
     def setup_bot_server(self, container_communication_config):
         # get the hostname

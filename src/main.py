@@ -11,7 +11,7 @@ from contextlib import asynccontextmanager
 # Check if the directory exists, if not, create it
 path = os.environ['PYTHONPATH']
 directory_path = f"{os.environ['RESOURCE_PATH']}/CosmFastapi-config.yaml"       
-log = logger.getLogger()
+log = logger.getLogger("main")
 
 with open(f"{directory_path}", 'r') as file:
     config = yaml.safe_load(file)
@@ -19,7 +19,7 @@ with open(f"{directory_path}", 'r') as file:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     log.info("fastApi starting.... create server socket")      
-    container_comm = ContainerCommunication(app, config, log)
+    container_comm = ContainerCommunication(app, config)
     yield
     log.info("fastApi closing.... close all open socket")      
     container_comm.close_all()

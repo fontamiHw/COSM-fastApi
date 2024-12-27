@@ -1,10 +1,11 @@
 import socket, json, threading
+import logger
 
 class Routes:
-    def __init__(self, app, log):
+    def __init__(self, app):
         self.app = app  
         self.init = False
-        self.log = log
+        self.log = logger.getLogger("Routes")
     
     def new_connection(self, connection):
         if not self.init:

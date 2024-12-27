@@ -14,3 +14,4 @@ container_communication:
 
 logs:
   webex-log: "CosmFastapi-logfile.log"
+  level: "DEBUG"
