@@ -1,7 +1,8 @@
 import os, json
 import logger
-from fastapi_bridge.model.prItem import PrItem
-from fastapi import File, UploadFile, HTTPException
+from fastapi_bridge.model.routeModels import PrItem
+from fastapi import File, HTTPException, UploadFile
+
     
 class Routes:
     def __init__(self, app):
@@ -22,19 +23,16 @@ class Routes:
         
         @self.app.post('/pr')
         async def receive_json(item: PrItem):
+            item.command ='pr'
             item_dict = item.model_dump()
             self.log.info(f"received from path /pr : {item_dict}")
             self.send(item_dict)
             return {"message": "command processed"}
-        #     if not data:
-        #         return jsonify({"error": "No JSON data provided"}), 400
-            
-        #     # Process the JSON data here
-        #     data = self.jenkins.event_received(data)
-        #     return jsonify({"message": "JSON data received", "data": data}), 200
 
         @self.app.post('/pr/file')
         def upload(file: UploadFile = File(...)):
+            item_dict = {'command': 'prFile', 'filename': file.filename}        
+            self.log.info(f"received from path /pr/file : {item_dict}")
             try:
                 contents = file.file.read()
                 with open(f"{self.directory_path}/{file.filename}", 'wb') as f:
@@ -45,15 +43,6 @@ class Routes:
                 file.file.close()
 
             return {"message": f"Successfully uploaded {file.filename}"}
-        # def receive_file():
-        #     if 'file' not in request.files:
-        #         return jsonify({"error": "No file part in the request"}), 400
-        #     file = request.files['file']
-        #     if file.filename == '':
-        #         return jsonify({"error": "No selected file"}), 400
-        #     # Save the file or process it here
-        #     file.save(f"./{file.filename}")
-        #     return jsonify({"message": "File received", "filename": file.filename}), 200
                 
         @self.app.get("/predict")            
         async def predict(x: float):

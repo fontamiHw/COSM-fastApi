@@ -1,11 +1,14 @@
 #!/bin/bash
-export APPLOGS="./host/logs"
+export APPLOGS="./host/logs" 
 export RESOURCE_PATH="./host/resources"
 export PYTHONPATH="./src":${PYTHONPATH}
 export APP_PR_FILES="./host/pr"
 
-rm -rf ${APPLOGS}/*
+mkdir -p ${APPLOGS}
+mkdir -p ${RESOURCE_PATH}
 mkdir -p ${APP_PR_FILES}
+rm -rf ${APPLOGS}/*
+rm -rf ${RESOURCE_PATH}/*
 rm -rf ${APP_PR_FILES}/*
 
 cp CosmFastapi-debug-config.yaml ${RESOURCE_PATH}/CosmFastapi-config.yaml
