@@ -10,7 +10,8 @@ RUN apt-get -y update
 # # Upgrade already installed packages:
 RUN apt-get -y upgrade
 # Install a new package:
-RUN apt-get -y install syslog-ng vim net-tools iputils-ping logrotate cron
+RUN apt-get -y install syslog-ng vim net-tools iputils-ping 
+RUN apt-get -y install logrotate cron supervisor
 
 # Define environment variable
 ENV APP_ROOT_PATH="/app"
