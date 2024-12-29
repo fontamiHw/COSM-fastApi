@@ -1,4 +1,5 @@
 #!/bin/bash
+
 export APPLOGS="./host/logs" 
 export RESOURCE_PATH="./host/resources"
 export PYTHONPATH="./src":${PYTHONPATH}
