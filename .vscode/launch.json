@@ -17,6 +17,7 @@
             "env": {
                 "APPLOGS": "./host/logs",
                 "RESOURCE_PATH": "./host/resources",
+                "APP_PR_FILES": "./host/pr",
                 "PYTHONPATH": "${workspaceFolder}${pathSeparator}src"
             }
         }

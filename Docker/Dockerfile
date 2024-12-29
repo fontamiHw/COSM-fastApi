@@ -16,10 +16,12 @@ RUN apt-get -y install syslog-ng vim net-tools iputils-ping logrotate cron
 ENV APP_ROOT_PATH="/app"
 ENV APP_ROOT_HOST="${APP_ROOT_PATH}/host"
 ENV APP_COSM_PATH="${APP_ROOT_PATH}/CosmFastApi"
-ENV APPLOGS="${APP_ROOT_HOST}/logs"
-ENV RESOURCE_PATH="${APP_ROOT_HOST}/resources"
 ENV TMP_RESOURCE_PATH="${APP_ROOT_PATH}/resources"
 ENV PYTHONPATH="${APP_COSM_PATH}"
+# will be created from the run script 
+ENV APPLOGS="${APP_ROOT_HOST}/logs"
+ENV RESOURCE_PATH="${APP_ROOT_HOST}/resources"
+ENV APP_PR_FILES="${APP_ROOT_HOST}/pr"
 
 # Create a new directory under /app
 RUN mkdir -p ${APP_ROOT_HOST}
@@ -45,7 +47,7 @@ RUN crontab /etc/cron.d/logrotate
 # Install any needed packages specified in requirements.txt
 # If you don't have any additional packages, you can skip this step
 RUN pip install --no-cache-dir  pyaml 
-RUN pip install --no-cache-dir "fastapi[standard]" 
+RUN pip install --no-cache-dir "fastapi[standard]" python-multipart
 
 # Copy the system files
 COPY run.sh ${APP_ROOT_PATH}

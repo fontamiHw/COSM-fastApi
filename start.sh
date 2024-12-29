@@ -2,8 +2,11 @@
 export APPLOGS="./host/logs"
 export RESOURCE_PATH="./host/resources"
 export PYTHONPATH="./src":${PYTHONPATH}
+export APP_PR_FILES="./host/pr"
 
 rm -rf ${APPLOGS}/*
+mkdir -p ${APP_PR_FILES}
+rm -rf ${APP_PR_FILES}/*
 
 cp CosmFastapi-debug-config.yaml ${RESOURCE_PATH}/CosmFastapi-config.yaml
 # Path to the YAML file

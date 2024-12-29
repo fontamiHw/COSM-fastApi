@@ -1,12 +1,15 @@
-import socket, json, threading
+import os, json
 import logger
 from fastapi_bridge.model.prItem import PrItem
+from fastapi import File, UploadFile, HTTPException
     
 class Routes:
     def __init__(self, app):
         self.app = app  
         self.init = False
         self.log = logger.getLogger("Routes")
+        self.directory_path = f"{os.environ['APP_PR_FILES']}"       
+
     
     def new_connection(self, connection):
         if not self.init:
@@ -22,6 +25,7 @@ class Routes:
             item_dict = item.model_dump()
             self.log.info(f"received from path /pr : {item_dict}")
             self.send(item_dict)
+            return {"message": "command processed"}
         #     if not data:
         #         return jsonify({"error": "No JSON data provided"}), 400
             
@@ -30,6 +34,17 @@ class Routes:
         #     return jsonify({"message": "JSON data received", "data": data}), 200
 
         @self.app.post('/pr/file')
+        def upload(file: UploadFile = File(...)):
+            try:
+                contents = file.file.read()
+                with open(f"{self.directory_path}/{file.filename}", 'wb') as f:
+                    f.write(contents)
+            except Exception:
+                raise HTTPException(status_code=500, detail='Something went wrong')
+            finally:
+                file.file.close()
+
+            return {"message": f"Successfully uploaded {file.filename}"}
         # def receive_file():
         #     if 'file' not in request.files:
         #         return jsonify({"error": "No file part in the request"}), 400
