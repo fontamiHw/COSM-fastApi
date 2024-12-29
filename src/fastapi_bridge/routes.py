@@ -33,14 +33,18 @@ class Routes:
         def upload(file: UploadFile = File(...)):
             item_dict = {'command': 'prFile', 'filename': file.filename}        
             self.log.info(f"received from path /pr/file : {item_dict}")
+            sent = False
             try:
                 contents = file.file.read()
                 with open(f"{self.directory_path}/{file.filename}", 'wb') as f:
-                    f.write(contents)
+                    f.write(contents)                
+                sent = True
             except Exception:
                 raise HTTPException(status_code=500, detail='Something went wrong')
             finally:
                 file.file.close()
+                if sent:
+                    self.send(item_dict)
 
             return {"message": f"Successfully uploaded {file.filename}"}
                 

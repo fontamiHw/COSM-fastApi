@@ -1,5 +1,5 @@
  # Use the official lightweight Python image
-FROM python:3.8-slim
+FROM python:3.12-slim
 
 
 # Set the working directory
@@ -47,7 +47,7 @@ RUN crontab /etc/cron.d/logrotate
 # Install any needed packages specified in requirements.txt
 # If you don't have any additional packages, you can skip this step
 RUN pip install --no-cache-dir  pyaml 
-RUN pip install --no-cache-dir "fastapi[standard]" python-multipart
+RUN pip install --no-cache-dir "fastapi[standard]" python-multipart 
 
 # Copy the system files
 COPY run.sh ${APP_ROOT_PATH}
