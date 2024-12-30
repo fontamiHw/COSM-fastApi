@@ -3,13 +3,15 @@ HOST="../host"
 export APPLOGS="${HOST}/logs"
 export RESOURCE_PATH="${HOST}/resources"
 export APP_PR_FILES="${HOST}/pr"
+export SUPERVISOR_LOGS="${APPLOGS}/supervisord"
+
+mkdir -p ${HOST}
+rm -rf ${HOST}/*
 
 mkdir -p ${APPLOGS}
 mkdir -p ${RESOURCE_PATH}
 mkdir -p ${APP_PR_FILES}
-rm -rf ${APPLOGS}/*
-rm -rf ${RESOURCE_PATH}/*
-rm -rf ${APP_PR_FILES}/*
+mkdir -p ${SUPERVISOR_LOGS}
 
 cp ../CosmFastapi-config.yaml ${RESOURCE_PATH}/CosmFastapi-config.yaml
 
