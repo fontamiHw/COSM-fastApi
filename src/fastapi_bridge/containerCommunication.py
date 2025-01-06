@@ -1,5 +1,5 @@
 import socket, time, threading
-from fastapi_bridge.routes import Routes
+from fastapi_bridge.routesBridge import RoutesBridge
 import logger
 
 class ContainerCommunication:
@@ -7,7 +7,7 @@ class ContainerCommunication:
         self.log = logger.getLogger("ContainerCommunication")
         self.config = config
         self.setup_bot_server(config['container_communication'])
-        self.routes = Routes(app)
+        self.routes = RoutesBridge(app)
         
     def setup_bot_server(self, container_communication_config):
         # get the hostname
