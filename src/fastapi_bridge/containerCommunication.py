@@ -1,6 +1,6 @@
 import socket, time, threading
 from fastapi_bridge.routesBridge import RoutesBridge
-import logger
+import logger, json
 
 class ContainerCommunication:
     def __init__(self, app, config):
@@ -43,7 +43,23 @@ class ContainerCommunication:
             try:          
                 self.conn, self.address = self.server_socket.accept()  # accept new connection
                 self.routes.new_connection(self.conn)
+                self.manage_answer()
             except Exception as e:
-                self.log.error(f"Exception {e}\n Wait nother connection.")
+                self.log.error(f"Exception {e}\n Wait another connection.")
+                
+    def manage_answer(self):
+        
+        try:
+            while True:  
+                self.log.info("Waiting data.....")
+                # Receive data from the server
+                data = self.conn.recv(1024).decode('utf-8')                
+                
+                # prepare the data to be processed
+                data_json = json.loads(data)
+                self.log.info(f"Received: {data_json}")
+                
+        except Exception as e:
+            self.log.error(f"Received data in error due to : {e}.")
             
                                       

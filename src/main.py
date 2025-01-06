@@ -18,7 +18,7 @@ with open(f"{directory_path}", 'r') as file:
                 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    log.info("fastApi starting.... create server socket")      
+    log.info("Cosm-fastApi starting.... create server socket")      
     container_comm = ContainerCommunication(app, config)
     yield
     log.info("fastApi closing.... close all open socket")      

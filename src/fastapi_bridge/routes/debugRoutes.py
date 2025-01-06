@@ -16,9 +16,9 @@ class DebugRoutes(BasicRoute):
         async def get_user(admin: bool=False):
             item = DebugItemUser()   
             item.only_admin = admin           
-            item_dict= self.add_command(item, 'debug-users')
+            item_dict = self.add_command(item, 'debug-users')
             self.log.info(f"received from path /debug : {item_dict}")
-            self.bridge.send(item_dict)
+            self.send(item_dict)
             return {"message": "result on the log of the received application"}
         
         @self.app.get('/debug/server')
@@ -28,7 +28,7 @@ class DebugRoutes(BasicRoute):
             item = DebugItemServer()
             item.server = server
             item.admin = admin
-            item_dict= self.add_command(item, 'debug-server')
+            item_dict = self.add_command(item, 'debug-server')
             self.log.info(f"received from path /debug : {item_dict}")
-            self.bridge.send(item_dict)
+            self.send(item_dict)
             return {"message": "result on the log of the received application"}

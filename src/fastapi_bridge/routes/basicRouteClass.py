@@ -8,4 +8,7 @@ class BasicRoute(object):
     def add_command(self, item, command):
         item.command = command
         return item.model_dump()
+    
+    def send(self, command):
+        self.bridge.send(command)
 

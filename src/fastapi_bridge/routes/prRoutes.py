@@ -15,7 +15,7 @@ class PrRoutes(BasicRoute):
         async def post_pr(item: PrItem):            
             item_dict= self.add_command(item, 'pr')
             self.log.info(f"received from path /pr : {item_dict}")
-            self.bridge.send(item_dict)
+            self.send(item_dict)
             return {"message": "command processed"}
 
         @self.app.post('/pr/file')
@@ -33,6 +33,6 @@ class PrRoutes(BasicRoute):
             finally:
                 file.file.close()
                 if sent:
-                    self.bridge.send(item_dict)
+                    self.send(item_dict)
 
             return {"message": f"Successfully uploaded {file.filename}"}      
