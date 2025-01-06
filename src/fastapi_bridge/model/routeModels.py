@@ -13,3 +13,7 @@ class PrItem(Item):
 class DebugItemUser(Item):
     only_admin: bool | None = False
     
+
+class DebugItemServer(Item):
+    server: str | None = 'Git'
+    

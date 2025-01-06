@@ -12,14 +12,14 @@ class PrRoutes(BasicRoute):
         self.log.info("   prepare all the  Pr routes")
         
         @self.app.post('/pr')
-        async def receive_json(item: PrItem):            
+        async def post_pr(item: PrItem):            
             item_dict= self.add_command(item, 'pr')
             self.log.info(f"received from path /pr : {item_dict}")
             self.bridge.send(item_dict)
             return {"message": "command processed"}
 
         @self.app.post('/pr/file')
-        def upload(file: UploadFile = File(...)):
+        def upload_pr_file(file: UploadFile = File(...)):
             item_dict = {'command': 'prFile', 'filename': file.filename}        
             self.log.info(f"received from path /pr/file : {item_dict}")
             sent = False

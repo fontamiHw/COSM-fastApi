@@ -44,45 +44,6 @@
 			"response": []
 		},
 		{
-			"name": "send file json",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "/home/civico129/MyProject/COSM-fastApi/documentation/test.txt"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/pr/file",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"pr",
-						"file"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "request specific pr",
 			"request": {
 				"method": "POST",
@@ -151,6 +112,103 @@
 					"port": "8000",
 					"path": [
 						"pr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send file json",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/civico129/MyProject/COSM-fastApi/documentation/test.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/pr/file",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"pr",
+						"file"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request server",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/debug/server?server=Git",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"debug",
+						"server"
+					],
+					"query": [
+						{
+							"key": "server",
+							"value": "Git"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/debug/server?server=Git",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"debug",
+						"server"
+					],
+					"query": [
+						{
+							"key": "server",
+							"value": "Git"
+						}
 					]
 				}
 			},
