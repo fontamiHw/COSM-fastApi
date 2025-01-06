@@ -1,6 +1,7 @@
 import logger
 from fastapi_bridge.routes.basicRouteClass import BasicRoute
 from fastapi_bridge.model.routeModels import DebugItemUser, DebugItemServer
+from fastapi import HTTPException
 
 
 class DebugRoutes(BasicRoute):
@@ -21,9 +22,12 @@ class DebugRoutes(BasicRoute):
             return {"message": "result on the log of the received application"}
         
         @self.app.get('/debug/server')
-        async def get_server_data(server: str='Git'):
+        async def get_server_data(server: str='Git', admin: str=None):
+            if not admin:
+                raise HTTPException(status_code=500, detail='admin username is mandatory')
             item = DebugItemServer()
             item.server = server
+            item.admin = admin
             item_dict= self.add_command(item, 'debug-server')
             self.log.info(f"received from path /debug : {item_dict}")
             self.bridge.send(item_dict)

@@ -16,4 +16,5 @@ class DebugItemUser(Item):
 
 class DebugItemServer(Item):
     server: str | None = 'Git'
+    admin: str | None = None
     

@@ -162,7 +162,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/debug/server?server=Git",
+					"raw": "http://127.0.0.1:8000/debug/server?server=Git&admin=mfontane",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -179,6 +179,10 @@
 						{
 							"key": "server",
 							"value": "Git"
+						},
+						{
+							"key": "admin",
+							"value": "mfontane"
 						}
 					]
 				}
@@ -191,7 +195,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/debug/server?server=Git",
+					"raw": "http://127.0.0.1:8000/debug/users?admin=True",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -202,12 +206,12 @@
 					"port": "8000",
 					"path": [
 						"debug",
-						"server"
+						"users"
 					],
 					"query": [
 						{
-							"key": "server",
-							"value": "Git"
+							"key": "admin",
+							"value": "True"
 						}
 					]
 				}
