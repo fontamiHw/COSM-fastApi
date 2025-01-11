@@ -195,6 +195,35 @@
 				"method": "GET",
 				"header": [],
 				"url": {
+					"raw": "http://127.0.0.1:8000/debug/users?admin=true",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"debug",
+						"users"
+					],
+					"query": [
+						{
+							"key": "admin",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request system",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
 					"raw": "http://127.0.0.1:8000/debug/users?admin=True",
 					"protocol": "http",
 					"host": [
