@@ -10,6 +10,10 @@ class PrItem(Item):
     status: str | None = None    
     
 
+class DebugItemSystem(Item):
+    status: bool | None = True
+    
+
 class DebugItemUser(Item):
     only_admin: bool | None = False
     

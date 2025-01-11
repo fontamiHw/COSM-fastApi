@@ -6,14 +6,14 @@ from fastapi_bridge.routes.basicRouteClass import BasicRoute
 
 class PrRoutes(BasicRoute):
     def __init__(self, bridge, app):
-        super().__init__(bridge, app, logger.getLogger("Routes"))
+        super().__init__(bridge, 'pr', app, logger.getLogger("Routes"))
     
     def setup_routes(self):        
-        self.log.info("   prepare all the  Pr routes")
+        self.log.info("   prepare all the PrRoutes routes")
         
         @self.app.post('/pr')
         async def post_pr(item: PrItem):            
-            item_dict= self.add_command(item, 'pr')
+            item_dict= self.add_command(item)
             self.log.info(f"received from path /pr : {item_dict}")
             self.send(item_dict)
             return {"message": "command processed"}
