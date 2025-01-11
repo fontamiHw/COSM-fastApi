@@ -4,3 +4,4 @@ src/**/__pycache__
 /Docker/host
 /host/*
 *.tgz
+host-mount
