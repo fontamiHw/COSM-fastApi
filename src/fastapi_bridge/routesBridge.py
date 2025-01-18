@@ -34,21 +34,23 @@ class RoutesBridge(object):
     
     def send(self, data, need_answer=False):
         self.log.info(f"Sending {data} with answer {need_answer}")
-        self.needs_answer = need_answer
+        self.answer = None
         jsonDump = json.dumps(data)
         dataB = bytes(jsonDump, encoding="utf-8")
         self.conn.send(dataB)  # send data to the client
-        while self.needs_answer:
-            time.sleep(1)
+        start_time = time.time()
         if need_answer:
-            return self.answer
-        else :
+            while (not self.answer) and ((time.time() - start_time) < 60):
+                time.sleep(1)
+                if self.answer:
+                    return self.answer
+            return {"error": "No answer received"}
+        else:
             return None
         
         
     def received(self, answer):
         self.answer = answer
-        self.needs_answer = False
         self.log.info(f"Received: {answer}")
         
         
