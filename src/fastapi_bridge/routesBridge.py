@@ -1,9 +1,10 @@
-import os, json
+import os, json, time
 import logger
 from fastapi_bridge.routes.prRoutes import PrRoutes
 from fastapi_bridge.routes.debugUsersRoutes import DebugUsersRoutes
 from fastapi_bridge.routes.debugServerRoutes import DebugServerRoutes
 from fastapi_bridge.routes.systemRoutes import SystemRoutes
+
     
 class RoutesBridge(object):
     def __init__(self, app):
@@ -31,11 +32,25 @@ class RoutesBridge(object):
         self.debugSRoutes.setup_routes()
         self.systemRoute.setup_routes()    
     
-    def send(self, data):
-        self.log.info(f"Sending {data}")
+    def send(self, data, need_answer=False):
+        self.log.info(f"Sending {data} with answer {need_answer}")
+        self.needs_answer = need_answer
         jsonDump = json.dumps(data)
         dataB = bytes(jsonDump, encoding="utf-8")
         self.conn.send(dataB)  # send data to the client
+        while self.needs_answer:
+            time.sleep(1)
+        if need_answer:
+            return self.answer
+        else :
+            return None
+        
+        
+    def received(self, answer):
+        self.answer = answer
+        self.needs_answer = False
+        self.log.info(f"Received: {answer}")
+        
         
 
 

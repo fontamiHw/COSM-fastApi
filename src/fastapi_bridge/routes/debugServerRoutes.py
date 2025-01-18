@@ -2,11 +2,11 @@ import logger
 from fastapi_bridge.routes.basicRouteClass import BasicRoute
 from fastapi_bridge.model.routeModels import  DebugItemServer
 from fastapi import HTTPException
-
+from fastapi import FastAPI
 
 class DebugServerRoutes(BasicRoute):
     
-    def __init__(self, bridge, app):
+    def __init__(self, bridge, app: FastAPI):
         super().__init__(bridge, 'debug-server', app, logger.getLogger("DebugServerRoutes"))
         
     def setup_routes(self):        

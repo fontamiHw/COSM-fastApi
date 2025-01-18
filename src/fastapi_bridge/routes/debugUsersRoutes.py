@@ -18,6 +18,6 @@ class DebugUsersRoutes(BasicRoute):
             item.only_admin = admin           
             item_dict = self.add_command(item)
             self.log.info(f"received from path /debug : {item_dict}")
-            self.send(item_dict)
-            return {"message": "result on the log of the received application"}        
+            answer = self.send(item_dict, need_answer=True)
+            return answer     
        

@@ -14,7 +14,7 @@ directory_path = f"{os.environ['RESOURCE_PATH']}/CosmFastapi-config.yaml"
 log = logger.getLogger("main")
 
 with open(f"{directory_path}", 'r') as file:
-    config = yaml.safe_load(file)
+    config = yaml.safe_load(file) 
                 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

@@ -12,6 +12,6 @@ class BasicRoute(object):
         item.command = self.command
         return item.model_dump()
     
-    def send(self, data):
-        self.bridge.send(data)
+    def send(self, data, need_answer=False):
+        return self.bridge.send(data, need_answer)
 

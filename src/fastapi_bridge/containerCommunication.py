@@ -2,7 +2,7 @@ import socket, time, threading
 from fastapi_bridge.routesBridge import RoutesBridge
 import logger, json
 
-class ContainerCommunication:
+class ContainerCommunication: 
     def __init__(self, app, config):
         self.log = logger.getLogger("ContainerCommunication")
         self.config = config
@@ -57,7 +57,7 @@ class ContainerCommunication:
                 
                 # prepare the data to be processed
                 data_json = json.loads(data)
-                self.log.info(f"Received: {data_json}")
+                self.routes.received(data_json)
                 
         except Exception as e:
             self.log.error(f"Received data in error due to : {e}.")
