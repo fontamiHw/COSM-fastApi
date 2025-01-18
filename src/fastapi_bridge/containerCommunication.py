@@ -36,7 +36,7 @@ class ContainerCommunication:
         thread.start()
         
     def close_all(self):
-        self.conn.close()
+        self.server_socket.close()
     
     def run(self):
         while True:  

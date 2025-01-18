@@ -4,7 +4,7 @@
 
 # Install any needed packages specified in requirements.txt
 # If you don't have any additional packages, you can skip this step
-RUN pip install --no-cache-dir "fastapi[standard]"=0.115.6 python-multipart==0.0.19
+RUN pip install --no-cache-dir "fastapi[standard]"==0.115.6 python-multipart==0.0.19
 
 ENV APP_COSM_PATH="${APP_ROOT_PATH}/CosmFastApi"
 ENV PYTHONPATH="${APP_COSM_PATH}"
