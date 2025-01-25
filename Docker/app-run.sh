@@ -1,5 +1,4 @@
 #!/bin/bash
-
 ########### PREPARE MOUNTED VOLUME ###########
 echo "Creating mounted directories"
 mkdir -p ${APPLOGS}
@@ -7,7 +6,7 @@ mkdir -p ${RESOURCE_PATH}
 mkdir -p ${APP_PR_FILES}
 
 ########### PREPARE CONFIG IN MOUNTED VOLUME ###########
-echo "move resource files int the mounted path"
+echo "move resource files into the mounted path"
 filename="CosmFastapi-config.yaml"
 # Variables for source and destination directories
 source_file=${TMP_RESOURCE_PATH}/${filename}
@@ -28,6 +27,16 @@ echo
 
 ########### ENVIROMENT ###########
 export PATH="$APP_COSM_PATH:$PATH"
+
+echo "integrate the COM_FASTAPI enviromental variable"
+# Path to the YAML file
+yaml_file="${RESOURCE_PATH}/CosmFastapi-config.yaml"
+
+# Use yq to extract the value of 'port'
+export FASTAPI_PORT=$(yq eval '.fastapi.port' "$yaml_file")
+export FASTAPI_HOST=$(yq eval '.fastapi.host' "$yaml_file")
+export CONTAINERCOMM_PORT=$(yq eval '.container_communication.port' "$yaml_file") 
+
 echo "show enviroment variable"
 env
 echo

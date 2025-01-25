@@ -1,7 +1,6 @@
  # Use the official lightweight Python image
  FROM cosm-pythontool-base:latest
 
-
 # Install any needed packages specified in requirements.txt
 # If you don't have any additional packages, you can skip this step
 RUN pip install --no-cache-dir "fastapi[standard]"==0.115.6 python-multipart==0.0.19
@@ -30,6 +29,8 @@ RUN crontab /etc/cron.d/logrotate
 
 # Copy the supervisor configuration file
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf 
+
+COPY tools/* /usr/bin
 
 # Copy the system files. Make sure the script is executable
 COPY run.sh ${APP_ROOT_PATH}
