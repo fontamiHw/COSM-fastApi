@@ -22,3 +22,8 @@ class DebugItemServer(Item):
     server: str | None = 'Git'
     admin: str | None = None
     
+
+class DebugItemDb(Item):
+    db: str | None = 'Git'
+    admin: str | None = None
+    
