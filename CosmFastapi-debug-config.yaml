@@ -1,11 +1,13 @@
-logs:
-  webex-log: "FastApi-logfile.log"
-
-fastapi:
-  host: "127.0.0.1"
+# if in 'host' is configured the docker hostname and netowrk the app use an ip assigned by the docker.
+# otherwise if explicitally defined (withtin the range of the docker network definition) the app use it
+fastapi: 
+  host: "127.0.0.1" 
   port: 8000
 
+# configuration of the communication between the 2 containers
 container_communication:
+  # in case of Container running us the docker Network name created (see README.md for reference)
+  # if running on local server coul be 127.0.0.1 or whatelse is  decide for the server
   host: "127.0.0.1"
   port: 5000
   secErrorWait: 60
